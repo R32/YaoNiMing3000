@@ -1,0 +1,14 @@
+language: haxe
+
+sudo: false
+
+haxe:
+  - "3.2.0"
+  - development
+
+install:
+  - haxelib git chrome-extension https://github.com/tong/chrome.extension
+  - haxelib git hxnwjs https://github.com/R32/nwjs-extern
+
+hxml:
+  build.hxml

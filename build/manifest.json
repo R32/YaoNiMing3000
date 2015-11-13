@@ -1,0 +1,45 @@
+{
+	"name": "__MSG_APP_NAME__",
+	"version": "1.0.0",
+	"manifest_version": 2,
+	"default_locale": "zh_CN",
+	"description": "__MSG_DESCRIPTION__",
+	
+	"minimum_chrome_version": "45",
+  
+	"icons": {
+		"128": "images/icons/128.png"
+	},
+
+	"background": {
+		"scripts": ["js/background.js"]
+	},
+	
+	"commands": {
+		"xbot": {
+			"suggested_key": {
+				"default": "Ctrl+Shift+1"
+			},
+			"global": false,
+			"description": "XBot"
+		}
+	},
+	
+	// 这个仅适用于 extension 内部.而不是网站上.
+	//"content_security_policy": "script-src 'self' https://*.microsofttranslator.com https://*.bing.com;  style-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.microsofttranslator.com; img-src 'self' https://*.microsofttranslator.com; object-src 'self'",
+	
+	"permissions": [
+		"http://*.btc38.com/",
+		"<all_urls>",
+		"cookies",
+		"activeTab",
+		"storage",
+		"unlimitedStorage",
+		"tabs",
+		"commands",
+		"contextMenus",
+		"webRequest",
+		"webRequestBlocking",
+		"notifications"
+	]
+}

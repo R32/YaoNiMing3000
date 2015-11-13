@@ -1,0 +1,15 @@
+-dce full
+-D nwroot=build
+-D analyzer
+-cp src
+## --connect 6000,  # has moved to "build.hxproj"
+-lib hxnwjs
+-lib chrome-extension
+--each
+
+-main Background
+-js build/js/background.js
+
+--next
+-main Xbot
+-js build/js/xbot.js
