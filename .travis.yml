@@ -7,7 +7,7 @@ haxe:
   - development
 
 install:
-  - haxelib git chrome-extension https://github.com/tong/chrome.extension
+  - haxelib git chrome-extension https://github.com/r32/chrome.extension
   - haxelib git hxnwjs https://github.com/R32/nwjs-extern
 
 hxml:
