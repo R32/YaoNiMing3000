@@ -1,7 +1,7 @@
 要你命3000 [![Build Status](https://travis-ci.org/R32/YaoNiMing3000.svg?branch=master)](https://travis-ci.org/R32/YaoNiMing3000)
 --------
 
-**WIP**
+**Chrome 浏览器扩展(WIP)** 
 
 我费了一生的精力，集合十种杀人武器于一身的超级武器霸王，每样都能独当一面，现在集中在一起，看你怕不怕？
 
@@ -25,12 +25,12 @@
  
  - (未知)
 
- ### Dependencies
+### Dependencies
 
-  * 相关的 haxelib 参见 `build.hxml` 文件 
+ * 相关的 haxelib 参见 `build.hxml` 文件 
 
-  * 外部JS库及CSS 放置于 `build/libs/` 目录下
+ * 外部JS库及CSS 放置于 `build/libs/` 目录下
 
-   - `jQuery.min.js`
+  - `jQuery.min.js`
 
-   - `semantic ui`, 将其 css,js,theme 全放置于这个目录下
+  - `semantic ui`, 将其 css,js,theme 全放置于这个目录下
