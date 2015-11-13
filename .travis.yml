@@ -11,4 +11,4 @@ install:
   - haxelib git hxnwjs https://github.com/R32/nwjs-extern
 
 hxml:
-  build.hxml
+  - build.hxml
