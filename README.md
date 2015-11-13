@@ -1,4 +1,4 @@
-YaoNiMing3000
+YaoNiMing3000 [![Build Status](https://travis-ci.org/R32/YaoNiMing3000.svg?branch=master)](https://travis-ci.org/R32/YaoNiMing3000)
 --------
 
 **WIP**
