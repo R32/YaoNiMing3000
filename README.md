@@ -11,7 +11,7 @@
 
  - xbot `ctrl+shift+1` 未完成
  
- - (Proxy)
+ - (Proxy) 目前使用 [lantern](https://github.com/getlantern/lantern), 因此移除这项
  
  - (未知) 
  

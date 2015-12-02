@@ -43,11 +43,11 @@ class Redirect {
 	blocking 列表,  可能是由于被墙但又没有找到可用的镜像,暂时blocking防止超时加载, 或者广告
 	*/
 	public static var bl(default, null):Array<String> = [
-		"*://*.google.com/*",
-		"*://*.chrome.com/*",
-		"*://gstatic.com/*",
-		"*://ssl.gstatic.com/*",
-		"*://www.gstatic.com/*",
+		//"*://*.google.com/*",
+		//"*://*.chrome.com/*",
+		//"*://gstatic.com/*",
+		//"*://ssl.gstatic.com/*",
+		//"*://www.gstatic.com/*",
 		// 
 		"*://*.sczxy.com/*",		// 广告
 		"*://*.qtmojo.com/*",
