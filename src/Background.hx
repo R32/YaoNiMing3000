@@ -23,8 +23,8 @@ class Background {
 	inline static var btId = "bing_translator";
 	
 	static public function main() {
-		Commands.onCommand.removeListener(_onCommand);
-		Commands.onCommand.addListener(_onCommand);
+	//	Commands.onCommand.removeListener(_onCommand);
+	//	Commands.onCommand.addListener(_onCommand);
 		
 		ContextMenus.create( {
 			id:btId,
@@ -35,6 +35,7 @@ class Background {
 		Redirect.attach();
 	}
 	
+	/*
 	static function _onCommand(cmd:String):Void {
 		switch(cmd){
 			case "xbot":	// see manifest.json
@@ -48,4 +49,5 @@ class Background {
 			default:
 		}
 	}
+	*/
 }
