@@ -1,7 +1,8 @@
 package;
 
-import js.JQuery;
-import js.JQuery.JQueryHelper.J;
+
+import js.jquery.JQuery;
+import js.jquery.Helper.J;
 import js.Browser.document;
 import js.Promise;
 import chrome.Notifications;

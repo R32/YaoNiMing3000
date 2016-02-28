@@ -19,12 +19,12 @@
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="nwroot=build&#xA;analyzer" />
+    <option directives="js-es5&#xA;nwroot=build&#xA;analyzer" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
-    <option mainClass="Xbot" />
+    <option mainClass="Background" />
     <option enabledebug="False" />
-    <option additional="-dce full&#xA;## --connect 6000,  # has moved to &quot;build.hxproj&quot;&#xA;--each &#xA;--next " />
+    <option additional="-dce full" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>
@@ -41,7 +41,7 @@
     <hidden path="obj" />
   </hiddenPaths>
   <!-- Executed before build -->
-  <preBuildCommand>cmd /c haxe --connect 6000 $(OutputFile)</preBuildCommand>
+  <preBuildCommand>cmd /c haxe  --connect 6000 $(OutputFile)</preBuildCommand>
   <!-- Executed after build -->
   <postBuildCommand alwaysRun="False" />
   <!-- Other project options -->

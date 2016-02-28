@@ -1,4 +1,5 @@
 -dce full
+-D js-es5
 -D nwroot=build
 -D analyzer
 -cp src
@@ -13,3 +14,7 @@
 --next
 -main Xbot
 -js build/js/xbot.js
+
+--next
+-main Popup
+-js build/js/popup.js
