@@ -9,9 +9,9 @@
 
  - Redirect 自动(目前没有UI页面设置),重定向 google api 到国内镜向, 以及 blocking 一些网址
 
- - xbot `ctrl+shift+1` 未完成
+ - xbot 未完成
  
- - (Proxy) 目前使用 [lantern](https://github.com/getlantern/lantern), 因此移除这项
+ - ~~Proxy~~ 目前使用 [lantern](https://github.com/getlantern/lantern), 因此移除了这项
  
  - (未知) 
  
@@ -29,8 +29,12 @@
 
  * 相关的 haxelib 参见 `build.hxml` 文件 
 
- * 外部JS库及CSS 放置于 `build/libs/` 目录下
-
-  - `jQuery.min.js`
-
-  - `semantic ui`, 将其 css,js,theme 全放置于这个目录下
+ * 外部JS库及CSS 需要自行下载放置于 `build/libs/` 目录下, 类似于下边:
+ 
+```bash
+libs/
+  ├─ theme           # semantic 的主题目录
+  ├─ jQuery.min.js
+  ├─ semantic.js
+  └─ semantic.css    #注意默认的 css 带有 google 字体
+```
