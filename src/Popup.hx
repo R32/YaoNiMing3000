@@ -15,8 +15,7 @@ import helps.AssetsPath;
 class Popup{
 
 	public static function main(){
-		untyped Background = Extension.getBackgroundPage();
-		
+		Background.init(Extension.getBackgroundPage());
 		document.querySelector("#main").onclick = onClick;
 	}
 	

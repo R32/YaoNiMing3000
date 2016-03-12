@@ -16,10 +16,11 @@ import chrome.Privacy;
 import helps.AssetsPath;
 import chrome.AccessibilityFeatures;
 
-#if !js_bg
-@:native("bg") extern
-#else
+#if js_bg
 @:expose("bg") @:keep
+#else
+#if !macro @:build(Mt.build()) #end
+@:native("bg") extern
 #end
 class Background {
 	
