@@ -9,6 +9,7 @@
 --each
 
 -main Background
+-D js_bg
 -js build/js/background.js
 
 --next

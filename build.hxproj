@@ -19,7 +19,7 @@
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="js-es5&#xA;nwroot=build&#xA;analyzer" />
+    <option directives="js-es5&#xA;nwroot=build&#xA;analyzer&#xA;js_bg" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="Background" />

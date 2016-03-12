@@ -16,12 +16,15 @@ import chrome.Privacy;
 import helps.AssetsPath;
 import chrome.AccessibilityFeatures;
 
-@:expose("bg")
-@:keep
+#if !js_bg
+@:native("bg") extern
+#else
+@:expose("bg") @:keep
+#end
 class Background {
 	
-	public static var xbotId:Null<Int> = null;
-	public static function xbotLoad(){
+	public static var xbotId:Null<Int>;
+	public static function xbotLoad():Void{
 		if (xbotId == null) {
 			xbotId = -1;
 			Tabs.create( { url:AssetsPath.HTML_xbot}, function(tab) { xbotId = tab.id;} );
@@ -31,7 +34,7 @@ class Background {
 		}
 	}
 	
-	static public function main() {	
+	static public function main():Void {
 		ContextMenus.create( {
 			id: "bing_translator",
 			title:"Bing 在线翻译",
@@ -42,7 +45,7 @@ class Background {
 	}
 	
 	// for popup.hx
-	public static function bingTrans(url:js.html.URL, tab:Tab){
+	public static function bingTrans(url:js.html.URL, tab:Tab):Void{
 		BingTranslator.executeScript(url, tab);
 	}
 }
