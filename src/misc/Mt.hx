@@ -1,4 +1,4 @@
-package;
+package misc;
 
 
 #if macro
@@ -15,14 +15,14 @@ class Mt{
 	#if macro
 	/**
 	 - ~~remove static main function~~
-	 
+
 	 - add static inline init function
 	*/
 	static function build(){
 		var fields = Context.getBuildFields();
 		var pos = Context.currentPos();
 		var cls = Context.getLocalClass().get();
-		
+
 		var expose = cls.name;	// for native
 		switch(cls.meta.extract(":native")) {
 			case [ { name:_, pos:_, params:[t] } ]:
@@ -30,7 +30,7 @@ class Mt{
 				expose = expose.substr(1, expose.length - 2);
 			default:
 		}
-		
+
 		/*
 		for (f in fields){
 			if (f.name == "main" && f.access.indexOf(AStatic) != -1 ) {
@@ -38,7 +38,7 @@ class Mt{
 				break;
 			}
 		}*/
-		
+
 		fields.push({
 			name: "init",
 			doc: "e.g: init(chrome.Extension.getBackgroundPage());",
@@ -57,7 +57,7 @@ class Mt{
 				}
 			})
 		});
-		
+
 		return fields;
 	}
 	#end
