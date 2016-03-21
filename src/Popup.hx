@@ -11,7 +11,6 @@ import js.html.URL;
 import chrome.Extension;
 import chrome.Tabs;
 import chrome.Storage;
-import helps.AssetsPath;
 import misc.Data;
 
 
@@ -33,20 +32,19 @@ class Popup{
 		block.classList.toggle(ACTIVE, ps.block);
 	}
 
-
 	static function onClick(e:MouseEvent):Void{
 		var tar:js.html.DOMElement = cast e.target;
 		var tag_a:Bool = tar.tagName == "A";
 
-		e.preventDefault();
+		e.preventDefault();		// prevent A Link
 		e.stopPropagation();
 
 		if(tag_a){
 			switch (tar.className) {
-				case "item xbot":
-					Background.xbotLoad();
 				case "item bing_trans":
 					Tabs.query({ active: true, currentWindow: true }, onBingTrans);
+				case "item xbot", "item options":
+					Background.load2Page(untyped tar.href);
 				default:
 			}
 			window.close();

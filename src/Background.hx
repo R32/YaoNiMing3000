@@ -3,6 +3,7 @@ package;
 import chrome.Extension;
 import chrome.Runtime;
 import js.Browser.window;
+import js.Promise;
 import chrome.BrowserAction;
 import chrome.Tabs;
 import chrome.Commands;
@@ -11,7 +12,6 @@ import chrome.Notifications;
 import chrome.Storage;
 import chrome.Proxy;
 import chrome.Privacy;
-import helps.AssetsPath;
 import chrome.AccessibilityFeatures;
 import misc.Data;
 import bg.Redirect;
@@ -25,16 +25,25 @@ import bg.BingTranslator;
 #end
 class Background {
 
-	public static var xbotId:Null<Int>;
-	public static function xbotLoad():Void{
-		if (xbotId == null) {
-			xbotId = -1;
-			Tabs.create( { url:AssetsPath.HTML_xbot}, function(tab) { xbotId = tab.id;} );
-			Tabs.onRemoved.addListener(function(id, _) { if (xbotId == id) xbotId = null;} );
-		}else if (xbotId != -1) {
-			Tabs.update(xbotId, { active:true } );
-		}
+	/**
+	* 打开指定页面, 如果页面已经存在则将这个页面设为焦点
+	* @param href e.g: chrome.Extension.getURL(uri);
+	*/
+	public static function load2Page(href:String):Void{
+		new Promise(function(resolve, reject){
+			Tabs.query({url:href}, function(tabs:Array<Tab>){
+				if(tabs.length > 0){
+					resolve(tabs[0]);
+				}else{
+					reject(href);
+				}
+			});
+		}).then(loadThen).catchError(loadError);
 	}
+
+	static function loadThen(tab:Tab):Tab{ Tabs.update(tab.id, {active:true}); return tab; }
+
+	static function loadError(href:String):Void{ Tabs.create({url: href}, null); }
 
 	static public function main():Void {
 		ContextMenus.create( {
@@ -42,6 +51,16 @@ class Background {
 			title:"Bing 在线翻译",
 			documentUrlPatterns: ["*://*/*", "file:///*"],
 			onclick: BingTranslator.onContextMenuClick
+		});
+
+		ps = {block:false, redirect:true };
+
+		Storage.sync.get(ps, function(v:Ps){
+			ps.block = v.block;
+			ps.redirect = v.redirect;
+
+			if(ps.block) Redirect.dealBlock(true);
+			if(ps.redirect) Redirect.dealRedirect(true);
 		});
 	}
 
@@ -59,19 +78,4 @@ class Background {
 	}
 
 	public static var ps:Ps;
-
-	#if js_bg
-	static function __init__():Void{
-
-		ps = {block:false, redirect:true };
-
-		Storage.sync.get(ps, function(v:Ps){
-			ps.block = v.block;
-			ps.redirect = v.redirect;
-
-			if(ps.block) Redirect.dealBlock(true);
-			if(ps.redirect) Redirect.dealRedirect(true);
-		});
-	}
-	#end
 }
