@@ -59,8 +59,8 @@ class Background {
 			ps.block = v.block;
 			ps.redirect = v.redirect;
 
-			if(ps.block) Redirect.dealBlock(true);
-			if(ps.redirect) Redirect.dealRedirect(true);
+			if(ps.block) netBlock(true);
+			if(ps.redirect) netRedirect(true);
 		});
 	}
 
@@ -70,11 +70,13 @@ class Background {
 	}
 
 	public static function netBlock(b:Bool):Void{
-		Redirect.dealBlock(b);
+		var list = Redirect.spams;
+		if (b) list = list.concat(Redirect.bl);
+		Redirect.dealBlock(true, list);		// 暂时永久性禁掉广告连接
 	}
 
 	public static function netRedirect(b:Bool):Void{
-		Redirect.dealRedirect(b);
+		Redirect.dealRedirect(b, Redirect.rl);
 	}
 
 	public static var ps:Ps;

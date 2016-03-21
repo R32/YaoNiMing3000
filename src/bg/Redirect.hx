@@ -32,21 +32,23 @@ class Redirect {
 		};
 	}
 
-	public static function dealBlock(b:Bool):Void{
+	public static function dealBlock(b:Bool, blockList:Array<String>):Void{
 		WebRequest.onBeforeRequest.removeListener(blHandler);
-		if(b){
+		if (b && blockList != null && blockList.length > 0){
 			WebRequest.onBeforeRequest.addListener(blHandler, {
-				urls: bl
+				urls: blockList
 			}, [blocking]);
 		}
 	}
 
-	public static function dealRedirect(b:Bool):Void{
+	public static function dealRedirect(b:Bool, rediList:Dynamic<String>):Void{
 		WebRequest.onBeforeRequest.removeListener(rlHandler);
 
-		if(b){
+		if(b && rediList != null){
 			var hosts = [];
-			for (h in Reflect.fields(rl)) hosts.push("*://" + h + "/*");
+			for (h in Reflect.fields(rediList)) hosts.push("*://" + h + "/*");
+
+			if (hosts.length == 0) return;
 
 			WebRequest.onBeforeRequest.addListener(rlHandler, {
 				urls: hosts,
@@ -59,12 +61,14 @@ class Redirect {
 	blocking 列表,  可能是由于被墙但又没有找到可用的镜像,暂时blocking防止超时加载, 或者广告
 	*/
 	public static var bl(default, null):Array<String> = [
-		//"*://*.google.com/*",
-		//"*://*.chrome.com/*",
-		//"*://gstatic.com/*",
-		//"*://ssl.gstatic.com/*",
-		//"*://www.gstatic.com/*",
-		//
+		"*://*.google.com/*",
+		"*://*.chrome.com/*",
+		"*://gstatic.com/*",
+		"*://ssl.gstatic.com/*",
+		"*://www.gstatic.com/*",
+	];
+
+	public static var spams(default, null):Array<String> = [
 		"*://*.sczxy.com/*",		// 广告
 		"*://*.qtmojo.com/*",
 		"*://*.adinall.com/*",
