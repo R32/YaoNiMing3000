@@ -20,7 +20,6 @@ import bg.BingTranslator;
 #if js_bg
 @:expose("bg") @:keep
 #else
-#if !macro @:build(misc.Mt.build()) #end
 @:native("bg") extern
 #end
 class Background {
@@ -45,6 +44,7 @@ class Background {
 
 	static function loadError(href:String):Void{ Tabs.create({url: href}, null); }
 
+#if js_bg
 	static public function main():Void {
 		ContextMenus.create( {
 			id: "bing_translator",
@@ -63,7 +63,13 @@ class Background {
 			if(ps.redirect) netRedirect(true);
 		});
 	}
-
+#else
+	// for extern class, 这里无法同时获得 expose 和 native 的参数, 因为它们在不同的"空间"
+	// window[:native] = getBackgroundPage()[:expose];
+	static public inline function init(backpage:Dynamic):Void{
+		untyped window.bg = backpage.bg;
+	}
+#end
 	// for popup.hx
 	public static function bingTrans(url:js.html.URL, tab:Tab):Void{
 		BingTranslator.executeScript(url, tab);

@@ -20,7 +20,6 @@ class BingTranslator {
 		var proto = url.protocol.substring(0, 4);
 		if (proto == "file" || proto == "http"){
 			if (url.host.indexOf("github.com") == -1) {
-				trace(proto);
 				Tabs.executeScript(tab.id, {code: CODE} );
 			}
 		}
