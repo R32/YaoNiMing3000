@@ -33,35 +33,33 @@ class Popup{
 	}
 
 	static function onClick(e:MouseEvent):Void{
-		var tar:js.html.DOMElement = cast e.target;
-		var tag_a:Bool = tar.tagName == "A";
-
+		var tar:js.html.AnchorElement = cast e.target;
 		e.preventDefault();		// prevent A Link
 		e.stopPropagation();
 
-		if(tag_a){
+		if(tar.tagName == "A"){
 			switch (tar.className) {
-				case "item bing_trans":
-					Tabs.query({ active: true, currentWindow: true }, onBingTrans);
-				case "item xbot", "item options":
-					Background.load2Page(untyped tar.href);
-				default:
+			case "item bing_trans":
+				Tabs.query({ active: true, currentWindow: true }, onBingTrans);
+			case "item xbot", "item options":
+				Background.load2Page(tar.href);
+			default:
 			}
 			window.close();
-		}else{
+		} else {
 			switch(tar.id){
-				case "btn_redirect":
-					ps.redirect = !ps.redirect;
-					redirect.classList.toggle(ACTIVE, ps.redirect);
-					Background.netRedirect(ps.redirect);
-					Storage.sync.set(ps);
+			case "btn_redirect":
+				ps.redirect = !ps.redirect;
+				redirect.classList.toggle(ACTIVE, ps.redirect);
+				Background.netRedirect(ps.redirect);
+				Storage.sync.set(ps);
 
-				case "btn_block":
-					ps.block = !ps.block;
-					block.classList.toggle(ACTIVE, ps.block);
-					Background.netBlock(ps.block);
-					Storage.sync.set(ps);
-				default:
+			case "btn_block":
+				ps.block = !ps.block;
+				block.classList.toggle(ACTIVE, ps.block);
+				Background.netBlock(ps.block);
+				Storage.sync.set(ps);
+			default:
 			}
 		}
 	}

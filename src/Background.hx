@@ -1,21 +1,8 @@
 package;
 
-import chrome.Extension;
-import chrome.Runtime;
-import js.Browser.window;
-import js.Promise;
-import chrome.BrowserAction;
 import chrome.Tabs;
-import chrome.Commands;
-import chrome.ContextMenus;
-import chrome.Notifications;
-import chrome.Storage;
-import chrome.Proxy;
-import chrome.Privacy;
-import chrome.AccessibilityFeatures;
 import misc.Data;
 import bg.Redirect;
-import bg.BingTranslator;
 
 #if js_bg
 @:expose("bg") @:keep
@@ -23,39 +10,32 @@ import bg.BingTranslator;
 @:native("bg") extern
 #end
 class Background {
-
 	/**
 	* 打开指定页面, 如果页面已经存在则将这个页面设为焦点
 	* @param href e.g: chrome.Extension.getURL(uri);
 	*/
-	public static function load2Page(href:String):Void{
-		new Promise(function(resolve, reject){
-			Tabs.query({url:href}, function(tabs:Array<Tab>){
-				if(tabs.length > 0){
-					resolve(tabs[0]);
-				}else{
-					reject(href);
-				}
-			});
-		}).then(loadThen).catchError(loadError);
+	public static function load2Page(href:String, ?callb:Tab->Void):Void{
+		Tabs.query({url:href}, function(tabs:Array<Tab>){
+			if(tabs.length > 0){
+				Tabs.update(tabs[0].id, {active:true}, callb);
+			}else{
+				Tabs.create({url: href}, callb);
+			}
+		});
 	}
-
-	static function loadThen(tab:Tab):Tab{ Tabs.update(tab.id, {active:true}); return tab; }
-
-	static function loadError(href:String):Void{ Tabs.create({url: href}, null); }
 
 #if js_bg
 	static public function main():Void {
-		ContextMenus.create( {
+		chrome.ContextMenus.create( {
 			id: "bing_translator",
 			title:"Bing 在线翻译",
 			documentUrlPatterns: ["*://*/*", "file:///*"],
-			onclick: BingTranslator.onContextMenuClick
+			onclick: bg.BingTranslator.onContextMenuClick
 		});
 
 		ps = {block:false, redirect:true };
 
-		Storage.sync.get(ps, function(v:Ps){
+		chrome.Storage.sync.get(ps, function(v:Ps){
 			ps.block = v.block;
 			ps.redirect = v.redirect;
 
@@ -67,22 +47,26 @@ class Background {
 	// for extern class, 这里无法同时获得 expose 和 native 的参数, 因为它们在不同的"空间"
 	// window[:native] = getBackgroundPage()[:expose];
 	static public inline function init(backpage:Dynamic):Void{
-		untyped window.bg = backpage.bg;
+		untyped js.Browser.window.bg = backpage.bg;
 	}
 #end
 	// for popup.hx
 	public static function bingTrans(url:js.html.URL, tab:Tab):Void{
-		BingTranslator.executeScript(url, tab);
+		bg.BingTranslator.executeScript(url, tab);
 	}
 
 	public static function netBlock(b:Bool):Void{
 		var list = Redirect.spams;
 		if (b) list = list.concat(Redirect.bl);
-		Redirect.dealBlock(true, list);		// 暂时永久性禁掉广告连接
+		bg.Redirect.dealBlock(true, list);		// 暂时永久性禁掉广告连接
 	}
 
 	public static function netRedirect(b:Bool):Void{
-		Redirect.dealRedirect(b, Redirect.rl);
+		bg.Redirect.dealRedirect(b, Redirect.rl);
+	}
+
+	public static function log(val:Dynamic):Void{
+		js.Browser.console.log(val);
 	}
 
 	public static var ps:Ps;
