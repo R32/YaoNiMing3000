@@ -1,0 +1,78 @@
+body {
+	margin: 0;
+	font-family: "微软雅黑";
+	font-size: 15px;
+	background-color: white;
+}
+#main {
+	width: 180px;
+}
+#main .item {
+	margin: 0;
+	display: block;
+	padding: 12px 24px;
+	border-top: 1px solid #D9DDE1;
+	cursor: pointer;
+	background-color: #f6f8fa;
+	line-height: 1.25;
+	text-align: left;
+	color: #444d56;
+	text-decoration: none;
+}
+#main .item:first-child {
+	border: 0;
+	padding-top: 11px;
+}
+#main .item:hover {
+	background-color: #E6EBF1;
+}
+#main .relative {
+	position: relative;
+	padding: 0;
+	white-space: nowrap;
+}
+#main .relative .abs-center {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+}
+#main .relative .abs-center:after {
+	position: absolute;
+	content: attr(data-text);
+	width: 26px;
+	height: 26px;
+	line-height: 26px;
+	text-align: center;
+	left: -13px;
+	top: -13px;
+	background-color: #f6f8fa;
+	-webkit-border-radius: 13px;
+	   -moz-border-radius: 13px;
+	        border-radius: 13px;
+	color: #444d56;
+	z-index: 1;
+}
+#main .relative button {
+	cursor: pointer;
+	line-height: 1;
+	display: inline-block;
+	zoom: 1;
+	*display: inline;
+	font: inherit;
+	width: 89px;
+	padding: 11px 24px;
+	border: 0;
+	border-top: 1px solid #D9DDE1;
+	background-color: #D3D7DD;
+	color: #444d56;
+}
+#main .relative button:hover {
+	background-color: #C5CAD2;
+}
+#main .relative button:focus {
+	outline: 0;
+}
+#main .relative button.active {
+	color: #ffffff;
+	background-color: #F77923;
+}
