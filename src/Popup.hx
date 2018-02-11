@@ -14,7 +14,7 @@ import chrome.Storage;
 import misc.Data;
 
 
-class Popup{
+class Popup {
 
 	static inline var ACTIVE = "active";
 	static var ps:Ps;	// reference from Background
@@ -41,7 +41,7 @@ class Popup{
 			switch (tar.className) {
 			case "item bing_trans":
 				Tabs.query({ active: true, currentWindow: true }, onBingTrans);
-			case "item xbot", "item options":
+			case "item options":
 				Background.load2Page(tar.href);
 			default:
 			}

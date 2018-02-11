@@ -23,22 +23,11 @@
 		"default_title": "__MSG_APP_NAME__",
 		"default_popup": "popup.html"
 	},
-	
-	/*"commands": {
-		"xbot": {
-			"suggested_key": {
-				"default": "Ctrl+Shift+1"
-			},
-			"global": false,
-			"description": "XBot"
-		}
-	},*/
-	
+		
 	// 这个仅适用于 extension 内部.而不是网站上.
 	//"content_security_policy": "script-src 'self' https://*.microsofttranslator.com https://*.bing.com;  style-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.microsofttranslator.com; img-src 'self' https://*.microsofttranslator.com; object-src 'self'",
 	
 	"permissions": [
-		"http://*.btc38.com/",
 		"<all_urls>",
 		"cookies",
 		"activeTab",

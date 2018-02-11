@@ -3,49 +3,16 @@
 <head>
 	<meta charset="utf-8"/>
 	<title>popup</title>
-	<!--<link href="libs/semantic.css" rel="stylesheet" />-->
 	<link href="popup.css" rel="stylesheet" />
-<style>
-#main{
-  margin:0;
-  width:100%;
-  font-family:"微软雅黑";
-}
-
-#main div.buttons{
-  width:100%;
-  display:inline-flex;
-  padding-top:2px;
-}
-
-#btn_redirect{
-  border-top-left-radius: 0;
-}
-
-#btn_block{
-  border-top-right-radius: 0;
-}
-</style>
 </head>
 <body>
-	<div id="main" class="ui vertical pointing menu">
-      <a class="item bing_trans" title="">
-        Bing 在线翻译
-      </a>
-      <a href="xbot.html" class="item xbot" title="暂时隐藏" target="ynm_xbot">
-        xbot - 未完成
-      </a>
-      <a href="options.html" class="item options" target="ynm_options">
-        选项 - 未完成
-      </a>
-<!--  <div class="ui toggle checkbox item net-redirect">
-        <input type="checkbox" tabindex="0" class="hidden" />
-        <label>重定向</label>
-      </div>-->
-      <div class="ui buttons item">
-        <button id="btn_redirect" class="ui button toggle active net-redirect" title="将部分 Google API 及字体重定向到国内镜像">重定向</button>
-        <div class="or" data-text="A"></div>
-        <button id="btn_block" class="ui button toggle net-block" title="禁掉(阻塞)国内无镜像的 Google API 连接, 如果你有 VPN 请将这个按钮设成灰色">Block</button>
+	<div id="main">
+      <a class="item bing_trans">Bing 在线翻译</a>
+      <a href="options.html" class="item options" target="ynm_options">选项 - 未完成</a>
+      <div class="relative">
+        <button id="btn_redirect" class="net-redirect" title="将部分 Google API 及字体重定向到国内镜像">重定向</button>
+        <div class="abs-center" data-text="A"></div>
+        <button id="btn_block" class="net-block" title="禁掉(阻塞)国内无镜像的 Google API 连接, 如果你有 VPN 请将这个按钮设成灰色">Block</button>
 	  </div>
 	</div>
 	<script src="js/popup.js" type="text/javascript" ></script>

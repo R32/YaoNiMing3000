@@ -1,0 +1,94 @@
+var black       = #1b1f23;
+var white       = #ffffff;
+var red         = #d73a49;
+var purple      = #6f42c1;
+var blue        = #0366d6;
+var green       = #28a745;
+var yellow      = #ffd33d;
+var orange      = #f66a0a;
+
+var text-gray   = #444d56;
+var spacer-12   = 12px;
+var spacer-24   = 24px;
+var body-font   = 15px;
+var border-gray = lighten(#d1d5da, 3%);
+var bg-gray     = #f6f8fa;
+var popup-width = 180px;
+
+body {
+	margin: 0;
+	font-family: "微软雅黑";
+	font-size: $body-font;
+	background-color: white;
+}
+
+#main {
+	width: $popup-width;
+	.item {
+		margin: 0;
+		display: block;
+		padding: $spacer-12 $spacer-24;
+		border-top: 1px solid $border-gray;
+		cursor: pointer;
+		background-color: $bg-gray;
+		line-height: 1.25;
+		text-align: left;
+		color: $text-gray;
+		text-decoration: none;
+		// transition: background-color 0.5s, color 0.5s;
+		&:first-child {
+			border: 0;
+			padding-top: -1 + $spacer-12;
+		}
+		&:hover {
+			background-color: darken($bg-gray, 5%);
+		}
+	}
+
+	.relative {
+		position: relative;
+		padding: 0;
+		white-space: nowrap;
+		.abs-center {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			&:after {
+				position: absolute;
+				content: attr(data-text);
+				width: 26px;
+				height: 26px;
+				line-height: 26px;
+				text-align: center;
+				left: -13px;
+				top: -13px;
+				background-color: $bg-gray;
+				border-radius: 13px;
+				color: $text-gray;
+				z-index: 1;
+			}
+		}
+
+		button {
+			var bg-btn = darken(#e1e4e8, 5%);
+			cursor: pointer;
+			line-height: 1;
+			display: inline-block;
+			font: inherit;
+			width: $popup-width / 2 - 1;
+			padding: -1 + $spacer-12 $spacer-24;
+			border: 0;
+			border-top: 1px solid $border-gray;
+			background-color: $bg-btn;
+			color: $text-gray;
+			&:hover {
+				background-color: darken($bg-btn, 5%);
+			}
+			&:focus { outline: 0;}
+			&.active {
+				color: $white;
+				background-color: lighten($orange, 5%);
+			}
+		}
+	}
+}

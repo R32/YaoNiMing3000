@@ -1,10 +1,8 @@
 -dce full
--D js-es5
 -D wwwroot=build
--D analyzer
+-D analyzer-optimize
 -cp src
 -cp ../../labs/misc/utils
-## --connect 6000,  # has moved to "build.hxproj"
 -lib chrome-extension
 --each
 
@@ -13,9 +11,6 @@
 -js build/js/background.js
 
 --next
--main Xbot
--js build/js/xbot.js
-
---next
+--macro exclude('Background')
 -main Popup
 -js build/js/popup.js
