@@ -18,10 +18,8 @@ class BingTranslator {
 
 	public static function executeScript(url:URL, tab:Tab) {
 		var proto = url.protocol.substring(0, 4);
-		if (proto == "file" || proto == "http"){
-			if (url.host.indexOf("github.com") == -1) {
-				Tabs.executeScript(tab.id, {code: CODE} );
-			}
+		if (proto == "file" || proto == "http") {
+			Tabs.executeScript(tab.id, {code: CODE} );
 		}
 	}
 

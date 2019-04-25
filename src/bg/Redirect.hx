@@ -26,7 +26,7 @@ class Redirect {
 		var url = new URL(bd.url);
 
 		url.host = redirect_list.get(url.host);
-
+		url.protocol = "https:"; // force https, since ustclug.org no longer supports http
 		return {
 			redirectUrl: url.href
 		};
