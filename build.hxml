@@ -2,15 +2,15 @@
 -D wwwroot=build
 -D analyzer-optimize
 -cp src
--cp ../../labs/misc/utils
 -lib chrome-extension
+-D old-error-format
 --each
 
 -main Background
--D js_bg
 -js build/js/background.js
 
 --next
 --macro exclude('Background')
+--macro exclude('bg')
 -main Popup
 -js build/js/popup.js

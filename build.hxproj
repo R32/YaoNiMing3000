@@ -16,11 +16,10 @@
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="src" />
-    <class path="..\..\labs\misc\utils" />
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="wwwroot=build&#xA;analyzer-optimize&#xA;js_bg" />
+    <option directives="wwwroot=build&#xA;analyzer-optimize&#xA;old-error-format" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="Background" />

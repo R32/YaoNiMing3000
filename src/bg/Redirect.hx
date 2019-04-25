@@ -17,40 +17,39 @@ chrome extension 权限:	"webRequest", "webRequestBlocking", "<all_urls>"
 */
 class Redirect {
 
-	static function blHandler(bd:Dynamic):BlockingResponse {
+	static function blockHandler(bd:Dynamic):BlockingResponse {
 		return {cancel: true};
 	}
 
-	static function rlHandler(bd:Dynamic):BlockingResponse {
+	static function redirectHandler(bd:Dynamic):BlockingResponse {
 
 		var url = new URL(bd.url);
 
-		url.host = Reflect.field(rl, url.host);
+		url.host = redirect_list.get(url.host);
 
 		return {
 			redirectUrl: url.href
 		};
 	}
 
-	public static function dealBlock(b:Bool, blockList:Array<String>):Void{
-		WebRequest.onBeforeRequest.removeListener(blHandler);
+	public static function doBlock(b:Bool, blockList:Array<String>):Void{
+		WebRequest.onBeforeRequest.removeListener(blockHandler);
 		if (b && blockList != null && blockList.length > 0){
-			WebRequest.onBeforeRequest.addListener(blHandler, {
+			WebRequest.onBeforeRequest.addListener(blockHandler, {
 				urls: blockList
 			}, [blocking]);
 		}
 	}
 
-	public static function dealRedirect(b:Bool, rediList:Dynamic<String>):Void{
-		WebRequest.onBeforeRequest.removeListener(rlHandler);
+	public static function doRedirect(b:Bool, redirectList:haxe.DynamicAccess<String>):Void{
+		WebRequest.onBeforeRequest.removeListener(redirectHandler);
 
-		if(b && rediList != null){
+		if(b && redirectList != null){
 			var hosts = [];
-			for (h in Reflect.fields(rediList)) hosts.push("*://" + h + "/*");
-
+			for (key in redirectList.keys()) hosts.push("*://" + key + "/*");
 			if (hosts.length == 0) return;
 
-			WebRequest.onBeforeRequest.addListener(rlHandler, {
+			WebRequest.onBeforeRequest.addListener(redirectHandler, {
 				urls: hosts,
 				types: [stylesheet, script, image, other]
 			}, [blocking]);
@@ -60,7 +59,7 @@ class Redirect {
 	/**
 	blocking 列表,  可能是由于被墙但又没有找到可用的镜像,暂时blocking防止超时加载, 或者广告
 	*/
-	public static var bl(default, null):Array<String> = [
+	public static var block_list(default, null):Array<String> = [
 		"*://*.google.com/*",
 		"*://*.chrome.com/*",
 		"*://gstatic.com/*",
@@ -68,7 +67,7 @@ class Redirect {
 		"*://www.gstatic.com/*",
 	];
 
-	public static var spams(default, null):Array<String> = [
+	public static var spam_list(default, null):Array<String> = [
 		"*://*.sczxy.com/*",		// 广告
 		"*://*.qtmojo.com/*",
 		"*://*.adinall.com/*",
@@ -79,7 +78,7 @@ class Redirect {
 	/**
 	重定向列表
 	*/
-	public static var rl(default, null):Dynamic<String> = {
+	public static var redirect_list(default, null):haxe.DynamicAccess<String> = {
 		"fonts.googleapis.com" : "fonts.lug.ustc.edu.cn",
 		"ajax.googleapis.com" : "ajax.lug.ustc.edu.cn",
 		"themes.googleusercontent.com" : "google-themes.lug.ustc.edu.cn",

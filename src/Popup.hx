@@ -11,25 +11,28 @@ import js.html.URL;
 import chrome.Extension;
 import chrome.Tabs;
 import chrome.Storage;
-import misc.Data;
-
+import Data;
 
 class Popup {
 
 	static inline var ACTIVE = "active";
-	static var ps:Ps;	// reference from Background
+	static var localData: LocalData;	// reference from Background
 
-	static var redirect:Element;
-	static var block:Element;
+	static var elem_redirect:Element;
+	static var elem_block:Element;
+
+	static inline function initBackground() (js.Browser.window:Dynamic).backpage = (Extension.getBackgroundPage():Dynamic).backpage;
 
 	public static function main(){
-		Background.init(Extension.getBackgroundPage());
-		ps = Background.ps;
+		initBackground();
+
 		document.querySelector("#main").onclick = onClick;
-		redirect = document.querySelector("#main button.net-redirect");
-		block = document.querySelector("#main button.net-block");
-		redirect.classList.toggle(ACTIVE, ps.redirect);
-		block.classList.toggle(ACTIVE, ps.block);
+		localData = Background.localData;
+		elem_redirect = document.querySelector("#btn_redirect");
+		elem_redirect.classList.toggle(ACTIVE, localData.isRedirected);
+
+		elem_block = document.querySelector("#btn_block");
+		elem_block.classList.toggle(ACTIVE, localData.isBlocked);
 	}
 
 	static function onClick(e:MouseEvent):Void{
@@ -49,16 +52,16 @@ class Popup {
 		} else {
 			switch(tar.id){
 			case "btn_redirect":
-				ps.redirect = !ps.redirect;
-				redirect.classList.toggle(ACTIVE, ps.redirect);
-				Background.netRedirect(ps.redirect);
-				Storage.sync.set(ps);
+				localData.isRedirected = !localData.isRedirected;
+				elem_redirect.classList.toggle(ACTIVE, localData.isRedirected);
+				Background.netRedirect(localData.isRedirected);
+				Storage.sync.set(localData);
 
 			case "btn_block":
-				ps.block = !ps.block;
-				block.classList.toggle(ACTIVE, ps.block);
-				Background.netBlock(ps.block);
-				Storage.sync.set(ps);
+				localData.isBlocked = !localData.isBlocked;
+				elem_block.classList.toggle(ACTIVE, localData.isBlocked);
+				Background.netBlock(localData.isBlocked);
+				Storage.sync.set(localData);
 			default:
 			}
 		}
