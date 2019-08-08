@@ -5,7 +5,7 @@
 
 我费了一生的精力，集合十种杀人武器于一身的超级武器霸王，每样都能独当一面，现在集中在一起，看你怕不怕？
 
-- Bing 在线翻译, 通过右键菜单(contextMenu), 但不能处理带 "Content-Security-Policy" 限制的网址如: "github.com"
+- Bing 在线翻译 将不再可用, 使用 <https://www.translatetheweb.com/> 代替, 参见: [The Translator Web Widget will be retired soon](https://www.microsoft.com/en-us/translator/blog/2019/06/27/the-translator-web-widget-will-be-retired-soon/)
 
 - Redirect 重定向 google api 到国内镜向, 以及 blocking 一些网址
 

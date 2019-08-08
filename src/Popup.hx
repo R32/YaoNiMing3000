@@ -42,8 +42,6 @@ class Popup {
 
 		if(tar.tagName == "A"){
 			switch (tar.className) {
-			case "item bing_trans":
-				Tabs.query({ active: true, currentWindow: true }, onBingTrans);
 			case "item options":
 				Background.load2Page(tar.href);
 			default:

@@ -73,6 +73,7 @@ class Redirect {
 		"*://*.adinall.com/*",
 		"*://*.jtxh.net/*",
 		"*://*.songhua88.com/*",
+		"*://*.sogou.com/*",
 	];
 
 	/**

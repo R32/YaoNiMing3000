@@ -28,15 +28,8 @@ class Background {
 			localData.isBlocked = data.isBlocked;
 			localData.isRedirected = data.isRedirected;
 
-			if(localData.isBlocked) netBlock(true);
+			netBlock(localData.isBlocked);
 			if(localData.isRedirected) netRedirect(true);
-		});
-
-		chrome.ContextMenus.create( {
-			id: "bing_translator",
-			title:"Bing 在线翻译",
-			documentUrlPatterns: ["*://*/*", "file:///*"],
-			onclick: BingTranslator.onContextMenuClick
 		});
 	}
 
